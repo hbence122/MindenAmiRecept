@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Regisztracio"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtRCim"
+        android:text="Regisztráció"
+        android:textSize="50sp"
+        android:fontFamily="@font/creampeach"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="60dp"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Teljes név"
+        android:textSize="20sp"
+        android:id="@+id/edtxtRTeljes"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Felhasználónév"
+        android:textSize="20sp"
+        android:id="@+id/edtxtRFelhasz"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jelszó"
+        android:textSize="20sp"
+        android:id="@+id/edtxtRJelszo"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="20sp"
+        android:id="@+id/edtxtREmail"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Regisztráció"
+        android:id="@+id/bttnRegisztral"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Van már fiókom, belépek"
+        android:id="@+id/bttnVanFiok"
+        android:textSize="17sp"
+        android:layout_marginHorizontal="45dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+
+        />
+
+</LinearLayout>

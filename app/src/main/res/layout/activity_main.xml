@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCim"
+        android:text="Minden ami recept"
+        android:textSize="40sp"
+        android:fontFamily="@font/creampeach"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="130dp"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email vagy felhasználónév"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+
+        android:id="@+id/edtxtFelhasz"
+        android:layout_marginHorizontal="25dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jelszó"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        android:id="@+id/edtxtJelszo"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Belépés"
+        android:id="@+id/bttnBelepes"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginVertical="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belépés vendégként"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/txtVendeg"
+        android:clickable="true"
+        android:onClick="onClick"
+        />
+
+
+
+</LinearLayout>

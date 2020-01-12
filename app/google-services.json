@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "847693612421",
+    "firebase_url": "https://minden-ami-recept.firebaseio.com",
+    "project_id": "minden-ami-recept",
+    "storage_bucket": "minden-ami-recept.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847693612421:android:61c4d4b296b59aabe7b0ec",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847693612421-ohq625qujrecioajilidij6so1i6na6v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase",
+            "certificate_hash": "c2d39352c870e6ca59869e180f886980b57919be"
+          }
+        },
+        {
+          "client_id": "847693612421-na8k00mn3im6hpo7jl306bgvsqiudgpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzoxUVHFiGheBSmJUtNYPqRDS--u5ZmMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847693612421-na8k00mn3im6hpo7jl306bgvsqiudgpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847693612421:android:74bed6c599c30e09e7b0ec",
+        "android_client_info": {
+          "package_name": "com.example.mindenamirecept"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847693612421-knu6euhao55de2udfck9ik7da41jm9rb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mindenamirecept",
+            "certificate_hash": "c2d39352c870e6ca59869e180f886980b57919be"
+          }
+        },
+        {
+          "client_id": "847693612421-na8k00mn3im6hpo7jl306bgvsqiudgpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzoxUVHFiGheBSmJUtNYPqRDS--u5ZmMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847693612421-na8k00mn3im6hpo7jl306bgvsqiudgpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
