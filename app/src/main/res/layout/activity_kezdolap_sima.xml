@@ -22,6 +22,7 @@
         android:padding="5dp"
         android:background="@drawable/rounded"
         android:clickable="true"
+        android:onClick="onClickKeres"
         >
 
         <ImageView
@@ -52,6 +53,7 @@
         android:padding="5dp"
         android:background="@drawable/rounded"
         android:clickable="true"
+        android:onClick="onClickFeltolt"
         >
 
         <ImageView

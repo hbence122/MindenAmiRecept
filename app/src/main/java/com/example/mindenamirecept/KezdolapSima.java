@@ -35,4 +35,15 @@ public class KezdolapSima extends AppCompatActivity {
     public void init(){
         bttnKijelentkez=(Button) findViewById(R.id.bttnKijelentkez);
     }
+
+
+    public void onClickKeres(View view) {
+        Intent intent = new Intent(KezdolapSima.this, Kategoriak.class);
+        startActivity(intent);
+    }
+
+    public void onClickFeltolt(View view) {
+        Intent intent = new Intent(KezdolapSima.this, Feltoltes.class);
+        startActivity(intent);
+    }
 }
