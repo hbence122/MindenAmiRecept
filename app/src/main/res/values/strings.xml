@@ -14,4 +14,13 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string-array name="kategoriak">
+        <item>Előételek</item>
+        <item>Főételek</item>
+        <item>Levesek</item>
+        <item>Saláták</item>
+        <item>Desszertek</item>
+        <item>Egyéb</item>
+    </string-array>
 </resources>

@@ -19,6 +19,8 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:clickable="true"
+        android:onClick="onClickEloetel"
 
         />
 
@@ -69,6 +71,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDesszert"
         android:text="Desszertek"
+        android:fontFamily="@font/creampeach"
+        android:textSize="25sp"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="5dp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEgyeb"
+        android:text="Egyéb"
         android:fontFamily="@font/creampeach"
         android:textSize="25sp"
         android:layout_margin="10dp"
