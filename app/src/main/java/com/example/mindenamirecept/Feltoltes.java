@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,6 +26,7 @@ public class Feltoltes extends AppCompatActivity {
     EditText FeltoltEtxtNev, feltoltEtxt1, feltoltEtxt2, feltoltEtxt3, feltoltEtxt4, feltoltEtxt5, feltoltEtxtKeszit;
     Button btnFeltolt;
     private DatabaseReference databaseReceptek;
+    dbhelper dbhelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,40 @@ public class Feltoltes extends AppCompatActivity {
         btnFeltolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRecept();
+                //addRecept();
+                addReceptSQLite();
+
+
+
             }
         });
     }
+
+
+
+    public void addReceptSQLite() {
+
+        String receptNev = FeltoltEtxtNev.getText().toString().trim();
+        String receptKat = KatSpinner.getSelectedItem().toString();
+        String receptHozz1 = feltoltEtxt1.getText().toString().trim();
+        String receptHozz2 = feltoltEtxt2.getText().toString().trim();
+        String receptHozz3 = feltoltEtxt3.getText().toString().trim();
+        String receptHozz4 = feltoltEtxt4.getText().toString().trim();
+        String receptHozz5 = feltoltEtxt5.getText().toString().trim();
+        String receptKeszites = feltoltEtxtKeszit.getText().toString().trim();
+
+        Boolean adatRogzites = dbhelper.adatRogzites(receptNev, receptKat, receptHozz1, receptHozz2,receptHozz3, receptHozz4, receptHozz5, receptKeszites);
+
+        if (adatRogzites == true){
+
+            Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(Feltoltes.this, KezdolapSima.class);
+            finish();
+        }
+
+    }
+
 
     private void addRecept() {
         String receptNev = FeltoltEtxtNev.getText().toString().trim();
@@ -88,5 +120,6 @@ public class Feltoltes extends AppCompatActivity {
         feltoltEtxt5 = (EditText) findViewById(R.id.feltoltEtxt5);
         feltoltEtxtKeszit = (EditText) findViewById(R.id.feltoltEtxtKeszit);
         btnFeltolt = (Button) findViewById(R.id.btnFeltolt);
+        dbhelper =new dbhelper(this);
     }
 }

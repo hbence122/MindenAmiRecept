@@ -40,14 +40,14 @@ public class Regisztracio extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if(firebaseUser != null){
-                    Toast.makeText(Regisztracio.this, "Sikeres bejelentkezés",Toast.LENGTH_SHORT);
+                    //Toast.makeText(Regisztracio.this, "Sikeres bejelentkezés",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Regisztracio.this, KezdolapSima.class);
                     startActivity(intent);
                     finish();
 
                 }
                 else{
-                    Toast.makeText(Regisztracio.this, "Próbáld meg újra",Toast.LENGTH_SHORT);
+                    //Toast.makeText(Regisztracio.this, "Próbáld meg újra",Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -108,7 +108,7 @@ public class Regisztracio extends AppCompatActivity {
             finish();
         }
         else{
-            Toast.makeText(Regisztracio.this, "Írd be a felhasználónevet és a jelszót", Toast.LENGTH_LONG);
+            Toast.makeText(Regisztracio.this, "Írd be a felhasználónevet és a jelszót", Toast.LENGTH_LONG).show();
         }
     }
 

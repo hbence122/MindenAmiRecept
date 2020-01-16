@@ -48,6 +48,7 @@
         android:hint="Jelszó"
         android:textSize="20sp"
         android:id="@+id/edtxtRJelszo"
+        android:inputType="textPassword"
         android:layout_marginHorizontal="25dp"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"

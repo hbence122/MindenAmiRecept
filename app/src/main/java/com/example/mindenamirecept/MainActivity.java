@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if(firebaseUser != null){
-                    Toast.makeText(MainActivity.this, "Sikeres bejelentkezés",Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this, "Sikeres bejelentkezés",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, KezdolapSima.class);
                     startActivity(intent);
                     finish();
 
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "Próbáld meg újra",Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this, "Próbáld meg újra",Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
-                                Toast.makeText(MainActivity.this,"Hiba történt. Jelentkezz be újra!",Toast.LENGTH_SHORT);
+                                Toast.makeText(MainActivity.this,"Hiba történt. Jelentkezz be újra!",Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Intent intent = new Intent(MainActivity.this, KezdolapSima.class);
