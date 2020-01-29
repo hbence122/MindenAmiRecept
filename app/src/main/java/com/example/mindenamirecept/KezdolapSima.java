@@ -54,12 +54,11 @@ public class KezdolapSima extends AppCompatActivity {
 
     public void onClickFeltolt(View view) {
 
-                    Intent intent = new Intent(KezdolapSima.this, Feltoltes.class);
-                    startActivity(intent);
 
 
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-               /* else if (firebaseUser == null){
+                 if (firebaseUser == null){
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(KezdolapSima.this);
                     builder1.setMessage("Recept feltöltéséhez regisztráció szükséges!");
@@ -87,9 +86,16 @@ public class KezdolapSima extends AppCompatActivity {
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }
-            }
-        };
-*/
+
+                 else if (firebaseUser != null) {
+                     Intent intent = new Intent(KezdolapSima.this, Feltoltes.class);
+                     startActivity(intent);
+
+        }
+
+
+
+
 
 
 
