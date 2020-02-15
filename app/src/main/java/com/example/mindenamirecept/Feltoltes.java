@@ -44,8 +44,8 @@ public class Feltoltes extends AppCompatActivity {
         btnFeltolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //addRecept();
-                addReceptSQLite();
+                addRecept();
+                //addReceptSQLite();
 
 
 
@@ -96,7 +96,8 @@ public class Feltoltes extends AppCompatActivity {
             String id = databaseReceptek.push().getKey();
 
             Recept recept = new Recept(id, receptNev, receptKat, receptHozz1, receptHozz2, receptHozz3, receptHozz4, receptHozz5, receptKeszites);
-            databaseReceptek.child(id).setValue(recept);
+
+            databaseReceptek.child(receptKat).child(receptNev).setValue(recept);
             Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT);
 
             Intent intent = new Intent(Feltoltes.this, KezdolapSima.class);
