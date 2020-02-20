@@ -23,7 +23,7 @@ import java.util.List;
 public class Eloetelek extends AppCompatActivity {
 
     TextView txtRecept0 , txtRecept1;
-    DatabaseReference databaseReference;
+    DatabaseReference EloetelekReference;
 
 
     dbhelper dbhelper;
@@ -34,8 +34,21 @@ public class Eloetelek extends AppCompatActivity {
         setContentView(R.layout.activity_eloetelek);
         init();
 
-        adatLekerdezesFoetelek();
+        //adatLekerdezesFoetelek();
 
+        EloetelekReference= FirebaseDatabase.getInstance().getReference().child("receptek").child("Előételek").child("1");
+        EloetelekReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+           String ReceptNev = dataSnapshot.child("receptNev").getValue().toString();
+           txtRecept0.setText(ReceptNev);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 

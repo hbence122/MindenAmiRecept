@@ -3,7 +3,7 @@ package com.example.mindenamirecept;
 public class Recept {
 
 
-    String id;
+    long id;
     String receptNev;
     String receptKat;
     String receptHozz1;
@@ -16,7 +16,7 @@ public class Recept {
     public Recept() {
     }
 
-    public Recept(String id, String receptNev, String receptKat, String receptHozz1, String receptHozz2, String receptHozz3, String receptHozz4, String receptHozz5, String receptKeszites) {
+    public Recept(long id, String receptNev, String receptKat, String receptHozz1, String receptHozz2, String receptHozz3, String receptHozz4, String receptHozz5, String receptKeszites) {
 
         this.id=id;
         this.receptNev = receptNev;
@@ -29,7 +29,7 @@ public class Recept {
         this.receptKeszites = receptKeszites;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 

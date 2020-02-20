@@ -17,16 +17,22 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Feltoltes extends AppCompatActivity {
 
     Spinner KatSpinner;
     EditText FeltoltEtxtNev, feltoltEtxt1, feltoltEtxt2, feltoltEtxt3, feltoltEtxt4, feltoltEtxt5, feltoltEtxtKeszit;
     Button btnFeltolt;
-    private DatabaseReference databaseReceptek;
+    private DatabaseReference databaseReceptek, IdReference;
     dbhelper dbhelper;
+    long EloMaxID = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +43,49 @@ public class Feltoltes extends AppCompatActivity {
         databaseReceptek = FirebaseDatabase.getInstance().getReference("receptek");
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Feltoltes.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kategoriak));
+        android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kategoriak));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         KatSpinner.setAdapter(myAdapter);
+
+
+        //String receptKat = KatSpinner.getSelectedItem().toString();
+
+
+
+
+        IdReference= FirebaseDatabase.getInstance().getReference("receptek").child("Előételek");
+
+
+
+        IdReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    EloMaxID=(dataSnapshot.getChildrenCount());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
 
         btnFeltolt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addRecept();
+
                 //addReceptSQLite();
 
 
-
+                addRecept();
             }
         });
     }
@@ -89,15 +126,22 @@ public class Feltoltes extends AppCompatActivity {
         String receptHozz5 = feltoltEtxt5.getText().toString().trim();
         String receptKeszites = feltoltEtxtKeszit.getText().toString();
 
+
         if (!TextUtils.isEmpty(receptNev)){
 
 
 
-            String id = databaseReceptek.push().getKey();
+            //String id = databaseReceptek.push().getKey();
+
+            long id = EloMaxID+1;
+
+
+
+
 
             Recept recept = new Recept(id, receptNev, receptKat, receptHozz1, receptHozz2, receptHozz3, receptHozz4, receptHozz5, receptKeszites);
 
-            databaseReceptek.child(receptKat).child(receptNev).setValue(recept);
+            databaseReceptek.child(receptKat).child(String.valueOf(id)).setValue(recept);
             Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT);
 
             Intent intent = new Intent(Feltoltes.this, KezdolapSima.class);
