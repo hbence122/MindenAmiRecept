@@ -1,7 +1,10 @@
 package com.example.mindenamirecept;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +26,9 @@ import java.util.List;
 
 public class Eloetelek extends AppCompatActivity {
 
-    //TextView txtRecept0 , txtRecept1;
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference EloetelekReference;
+    RecyclerView recyclerView;
 
 
     dbhelper dbhelper;
@@ -33,11 +38,26 @@ public class Eloetelek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eloetelek);
         init();
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(Eloetelek.this));
 
         //adatLekerdezesFoetelek();
 
-        EloetelekReference= FirebaseDatabase.getInstance().getReference().child("receptek").child("Előételek").child("1");
-        EloetelekReference.addValueEventListener(new ValueEventListener() {
+
+        EloetelekReference= FirebaseDatabase.getInstance().getReference().child("receptek").child("Előételek");
+
+        //ActionBar actionBar = getSupportActionBar();
+
+        //actionBar.setTitle("Előételek");
+
+
+
+
+
+
+
+       /* EloetelekReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
            String ReceptNev = dataSnapshot.child("receptNev").getValue().toString();
@@ -48,7 +68,7 @@ public class Eloetelek extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 
@@ -85,6 +105,20 @@ public class Eloetelek extends AppCompatActivity {
         super.onStart();
 
 
+        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Model, ViewHolder>(Model.class, R.layout.row, ViewHolder.class, EloetelekReference) {
+                    @Override
+                    protected void populateViewHolder(ViewHolder viewHolder, Model model, int i) {
+
+                        viewHolder.setDetails(getApplicationContext(), model.getReceptNev(), model.getReceptLeiras(), model.getImage() );
+                    }
+                };
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+
+
 
         /*databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,6 +147,8 @@ public class Eloetelek extends AppCompatActivity {
         //txtRecept0 = (TextView) findViewById(R.id.txtRecept0);
         //txtRecept1 = (TextView) findViewById(R.id.txtRecept1);
         dbhelper = new dbhelper(Eloetelek.this);
+        recyclerView = findViewById(R.id.recyclerView);
+
 
 
 
