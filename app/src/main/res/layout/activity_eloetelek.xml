@@ -8,49 +8,11 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtCim"
-        android:text="Előételek"
-        android:textSize="40sp"
-        android:fontFamily="@font/creampeach"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="40dp"
-        android:textColor="@color/colorPrimary"
-        />
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/txtRecept0"
-        android:layout_marginHorizontal="20dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:background="@drawable/rounded"
-        android:textSize="20sp"
-        android:paddingHorizontal="15dp"
-        android:singleLine="true"
-        android:scrollbars="horizontal"
-        android:clickable="true"
-        android:onClick="onClickRecept"
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/txtRecept1"
-        android:layout_marginHorizontal="20dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:background="@drawable/rounded"
-        android:textSize="20sp"
-        android:paddingHorizontal="15dp"
-        android:layout_marginVertical="20dp"
-        android:singleLine="true"
-        android:scrollbars="horizontal"
-        android:clickable="true"
-        android:onClick="onClickRecept"
-
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
         />
 
 </LinearLayout>

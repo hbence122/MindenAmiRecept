@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Eloetelek extends AppCompatActivity {
 
-    TextView txtRecept0 , txtRecept1;
+    //TextView txtRecept0 , txtRecept1;
     DatabaseReference EloetelekReference;
 
 
@@ -41,7 +41,7 @@ public class Eloetelek extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
            String ReceptNev = dataSnapshot.child("receptNev").getValue().toString();
-           txtRecept0.setText(ReceptNev);
+           //txtRecept0.setText(ReceptNev);
             }
 
             @Override
@@ -70,8 +70,8 @@ public class Eloetelek extends AppCompatActivity {
                 stringBuffer2.append("" + eredmeny.getString(0) + "\n");
 
             }
-            txtRecept0.setText(stringBuffer.toString());
-            txtRecept1.setText(stringBuffer2.toString());
+            //txtRecept0.setText(stringBuffer.toString());
+            //txtRecept1.setText(stringBuffer2.toString());
             Toast.makeText(this, "Adat sikeresen lekérve!", Toast.LENGTH_SHORT).show();
         }else
             Toast.makeText(this, "Nincs adat amit lekérjen!", Toast.LENGTH_SHORT).show();
@@ -110,8 +110,8 @@ public class Eloetelek extends AppCompatActivity {
     }
 
     public void init(){
-        txtRecept0 = (TextView) findViewById(R.id.txtRecept0);
-        txtRecept1 = (TextView) findViewById(R.id.txtRecept1);
+        //txtRecept0 = (TextView) findViewById(R.id.txtRecept0);
+        //txtRecept1 = (TextView) findViewById(R.id.txtRecept1);
         dbhelper = new dbhelper(Eloetelek.this);
 
 

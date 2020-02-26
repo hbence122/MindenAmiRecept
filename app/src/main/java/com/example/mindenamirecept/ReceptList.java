@@ -32,7 +32,7 @@ public class ReceptList extends ArrayAdapter<Recept> {
 
         View listViewItem = inflater.inflate(R.layout.activity_eloetelek, null, true);
 
-        TextView txtRecept0 = (TextView) listViewItem.findViewById(R.id.txtRecept0);
+        //TextView txtRecept0 = (TextView) listViewItem.findViewById(R.id.txtRecept0);
 
         Recept recept = receptList.get(position);
 
