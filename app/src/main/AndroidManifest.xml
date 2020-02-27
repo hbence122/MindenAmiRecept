@@ -13,6 +13,8 @@
         <activity android:name=".Feltoltes" />
         <activity android:name=".Kategoriak" />
         <activity android:name=".KezdolapSima" />
+        <activity android:name=".GlobalClass" />
+
         <activity
             android:name=".Kezdolap"
             android:label="@string/title_activity_kezdolap"

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,7 @@ public class Eloetelek extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference EloetelekReference;
     RecyclerView recyclerView;
+    SharedPreferences sharedPreferencesResult;
 
 
     dbhelper dbhelper;
@@ -43,9 +46,13 @@ public class Eloetelek extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(Eloetelek.this));
 
         //adatLekerdezesFoetelek();
+        sharedPreferencesResult = getSharedPreferences("SaveKat", Context.MODE_PRIVATE);
+
+        String kategoria = sharedPreferencesResult.getString("Kategoria", "");
 
 
-        EloetelekReference= FirebaseDatabase.getInstance().getReference().child("receptek").child("Előételek");
+        //GlobalClass globalClass = (GlobalClass) getApplicationContext();
+        EloetelekReference = FirebaseDatabase.getInstance().getReference().child("receptek").child(kategoria);
 
         //ActionBar actionBar = getSupportActionBar();
 
@@ -151,6 +158,10 @@ public class Eloetelek extends AppCompatActivity {
 
 
 
+
+    }
+
+    public void loadKategoria(){
 
     }
 

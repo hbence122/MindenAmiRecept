@@ -35,6 +35,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:onClick="onClickFoetelek"
 
         />
 
@@ -49,6 +50,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:onClick="onClickLevesek"
 
         />
 
@@ -63,6 +65,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:onClick="onClickSalatak"
 
         />
 
@@ -77,6 +80,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:onClick="onClickDesszertek"
 
         />
 
@@ -91,6 +95,7 @@
         android:background="@drawable/rounded"
         android:backgroundTint="@color/colorPrimary"
         android:padding="5dp"
+        android:onClick="onClickEgyeb"
 
         />
 
