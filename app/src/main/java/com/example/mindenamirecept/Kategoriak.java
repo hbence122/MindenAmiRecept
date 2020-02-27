@@ -16,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Kategoriak extends AppCompatActivity {
 
+
+
     DatabaseReference KatReference;
     RecyclerView recyclerView;
 
@@ -27,6 +29,7 @@ public class Kategoriak extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kategoriak);
+
 
 
 
