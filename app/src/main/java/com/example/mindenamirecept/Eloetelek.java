@@ -100,7 +100,10 @@ public class Eloetelek extends AppCompatActivity {
 
 
     private void firebaseSearch(String searchText){
-        Query firebaseSearchQuery = EloetelekReference.orderByChild("receptNev").startAt(searchText).endAt(searchText + "\uf0ff");
+
+        String query =( searchText.toLowerCase());
+
+        Query firebaseSearchQuery = EloetelekReference.orderByChild("search").startAt(query).endAt(query + "\uf0ff");
 
         FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Model, ViewHolder>(Model.class, R.layout.row, ViewHolder.class, firebaseSearchQuery) {

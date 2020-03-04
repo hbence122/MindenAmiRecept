@@ -341,7 +341,6 @@
             android:layout_height="25dp"
             android:textSize="20sp"
             android:id="@+id/Hozz19"
-
             android:layout_marginVertical="0dp"
             android:layout_marginHorizontal="20dp"
             android:paddingHorizontal="20dp"

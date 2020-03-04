@@ -95,6 +95,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:scrollbars="horizontal"
         android:singleLine="true"
+
         />
 
     <EditText
@@ -109,6 +110,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:scrollbars="horizontal"
         android:singleLine="true"
+
         />
 
     <EditText
@@ -123,13 +125,29 @@
         android:backgroundTint="@color/colorPrimary"
         android:scrollbars="horizontal"
         android:singleLine="true"
+        android:visibility="gone"
         />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt5"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:textSize="20sp"
-        android:id="@+id/feltoltEtxt5"
+        android:id="@+id/feltoltEtxt6"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="20dp"
         android:paddingHorizontal="20dp"
@@ -137,7 +155,218 @@
         android:backgroundTint="@color/colorPrimary"
         android:scrollbars="horizontal"
         android:singleLine="true"
+        android:visibility="gone"
         />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt7"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt8"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt9"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt10"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt11"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt12"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt13"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt14"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt15"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt16"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt17"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt18"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:id="@+id/feltoltEtxt19"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/colorPrimary"
+            android:scrollbars="horizontal"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/HozzavaloHozzaadbtn"
+            android:text="Hozzávaló hozzáadása"
+            android:textSize="10sp"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="250dp"
+
+
+
+            />
+
+
 
     <EditText
         android:layout_width="match_parent"
