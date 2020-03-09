@@ -96,7 +96,7 @@ public class Regisztracio extends AppCompatActivity {
 
             String id = databaseUsers.push().getKey();
 
-            User user = new User(id, username, password, name, email);
+            User user = new User(id, username, name, email);
             databaseUsers.child(id).setValue(user);
 
 
