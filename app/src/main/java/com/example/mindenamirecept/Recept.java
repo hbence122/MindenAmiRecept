@@ -6,6 +6,8 @@ public class Recept {
     long id;
     String receptNev;
     String receptKat;
+    String image;
+    String search;
     String receptHozz1;
     String receptHozz2;
     String receptHozz3;
@@ -30,7 +32,8 @@ public class Recept {
     public Recept() {
     }
 
-    public Recept(long id, String receptNev, String receptKat, String receptHozz1,
+    public Recept(long id, String receptNev, String receptKat,String image, String search,
+                  String receptHozz1,
                   String receptHozz2,
                   String receptHozz3,
                   String receptHozz4,
@@ -54,6 +57,8 @@ public class Recept {
         this.id=id;
         this.receptNev = receptNev;
         this.receptKat = receptKat;
+        this.image = image;
+        this.search = search;
         this.receptHozz1 = receptHozz1;
         this.receptHozz2 = receptHozz2;
         this.receptHozz3 = receptHozz3;
@@ -86,6 +91,14 @@ public class Recept {
 
     public String getReceptKat() {
         return receptKat;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getSearch() {
+        return search;
     }
 
     public String getReceptHozz1() {

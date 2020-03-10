@@ -37,6 +37,15 @@
             android:textSize="17sp"
             />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/pImageIv"
+            android:src="@drawable/receptfeltolt"
+
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

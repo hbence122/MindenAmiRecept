@@ -1,20 +1,31 @@
 package com.example.mindenamirecept;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Feltoltes extends AppCompatActivity {
 
@@ -43,10 +58,18 @@ public class Feltoltes extends AppCompatActivity {
             feltoltEtxt19,
             feltoltEtxtKeszit;
     Button btnFeltolt, HozzavaloHozzaadbtn;
+    ImageView mPostIv;
     private DatabaseReference databaseReceptek, IdReference;
+    private StorageReference mStorageReference;
     dbhelper dbhelper;
     long EloMaxID = 0;
     int kattDarab = 3;
+    String mStoragePath = "OsszesFeltoltottKep/";
+    String mDatabasePath = "receptek";
+
+    Uri mFilePathUri;
+    ProgressDialog mProgressDialog;
+    int IMAGE_REQUEST_CODE = 5;
 
 
 
@@ -57,6 +80,8 @@ public class Feltoltes extends AppCompatActivity {
         init();
 
         databaseReceptek = FirebaseDatabase.getInstance().getReference("receptek");
+        mStorageReference = FirebaseStorage.getInstance().getReference();
+       // mProgressDialog = new ProgressDialog(Feltoltes.this);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Feltoltes.this,
         android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kategoriak));
@@ -87,6 +112,20 @@ public class Feltoltes extends AppCompatActivity {
 
             }
         });
+
+
+        mPostIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Kép kiválasztása"), IMAGE_REQUEST_CODE);
+            }
+        });
+
+
+
 
 
 
@@ -207,79 +246,125 @@ public class Feltoltes extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            mFilePathUri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mFilePathUri);
+                mPostIv.setImageBitmap(bitmap);
+            }
+            catch (Exception e){
+                Toast.makeText(Feltoltes.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private void addRecept() {
-        String receptNev = FeltoltEtxtNev.getText().toString().trim();
-        String receptKat = KatSpinner.getSelectedItem().toString();
-        String receptHozz1 = feltoltEtxt1.getText().toString().trim();
-        String receptHozz2 = feltoltEtxt2.getText().toString().trim();
-        String receptHozz3 = feltoltEtxt3.getText().toString().trim();
-        String receptHozz4 = feltoltEtxt4.getText().toString().trim();
-        String receptHozz5 = feltoltEtxt5.getText().toString().trim();
-        String receptHozz6 = feltoltEtxt6.getText().toString().trim();
-        String receptHozz7 = feltoltEtxt7.getText().toString().trim();
-        String receptHozz8 = feltoltEtxt8.getText().toString().trim();
-        String receptHozz9 = feltoltEtxt9.getText().toString().trim();
-        String receptHozz10 = feltoltEtxt10.getText().toString().trim();
-        String receptHozz11 = feltoltEtxt11.getText().toString().trim();
-        String receptHozz12 = feltoltEtxt12.getText().toString().trim();
-        String receptHozz13 = feltoltEtxt13.getText().toString().trim();
-        String receptHozz14 = feltoltEtxt14.getText().toString().trim();
-        String receptHozz15 = feltoltEtxt15.getText().toString().trim();
-        String receptHozz16 = feltoltEtxt16.getText().toString().trim();
-        String receptHozz17 = feltoltEtxt17.getText().toString().trim();
-        String receptHozz18 = feltoltEtxt18.getText().toString().trim();
-        String receptHozz19 = feltoltEtxt19.getText().toString().trim();
 
-        String receptKeszites = feltoltEtxtKeszit.getText().toString();
+        if (mFilePathUri != null){
+            StorageReference storageReference2 = mStorageReference.child(mStoragePath + System.currentTimeMillis()+ "." + getFileExtension(mFilePathUri));
+
+            storageReference2.putFile(mFilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful());
+                    Uri downloadUrl = urlTask.getResult();
+
+                    String receptNev = FeltoltEtxtNev.getText().toString().trim();
+
+                    String receptKat = KatSpinner.getSelectedItem().toString();
+                    String receptHozz1 = feltoltEtxt1.getText().toString().trim();
+                    String receptHozz2 = feltoltEtxt2.getText().toString().trim();
+                    String receptHozz3 = feltoltEtxt3.getText().toString().trim();
+                    String receptHozz4 = feltoltEtxt4.getText().toString().trim();
+                    String receptHozz5 = feltoltEtxt5.getText().toString().trim();
+                    String receptHozz6 = feltoltEtxt6.getText().toString().trim();
+                    String receptHozz7 = feltoltEtxt7.getText().toString().trim();
+                    String receptHozz8 = feltoltEtxt8.getText().toString().trim();
+                    String receptHozz9 = feltoltEtxt9.getText().toString().trim();
+                    String receptHozz10 = feltoltEtxt10.getText().toString().trim();
+                    String receptHozz11 = feltoltEtxt11.getText().toString().trim();
+                    String receptHozz12 = feltoltEtxt12.getText().toString().trim();
+                    String receptHozz13 = feltoltEtxt13.getText().toString().trim();
+                    String receptHozz14 = feltoltEtxt14.getText().toString().trim();
+                    String receptHozz15 = feltoltEtxt15.getText().toString().trim();
+                    String receptHozz16 = feltoltEtxt16.getText().toString().trim();
+                    String receptHozz17 = feltoltEtxt17.getText().toString().trim();
+                    String receptHozz18 = feltoltEtxt18.getText().toString().trim();
+                    String receptHozz19 = feltoltEtxt19.getText().toString().trim();
+
+                    String receptKeszites = feltoltEtxtKeszit.getText().toString();
+                    long id = EloMaxID+1;
+
+                    Recept recept = new Recept(id, receptNev, receptKat, downloadUrl.toString(), receptNev.toLowerCase(),
+                            receptHozz1,
+                            receptHozz2,
+                            receptHozz3,
+                            receptHozz4,
+                            receptHozz5,
+                            receptHozz6,
+                            receptHozz7,
+                            receptHozz8,
+                            receptHozz9,
+                            receptHozz10,
+                            receptHozz11,
+                            receptHozz12,
+                            receptHozz13,
+                            receptHozz14,
+                            receptHozz15,
+                            receptHozz16,
+                            receptHozz17,
+                            receptHozz18,
+                            receptHozz19,
+                            receptKeszites);
+
+                    databaseReceptek.child(receptKat).child(String.valueOf(id)).setValue(recept);
+
+                    Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT);
+
+                    Intent intent = new Intent(Feltoltes.this, KezdolapSima.class);
+                    finish();
 
 
-        if (!TextUtils.isEmpty(receptNev)){
+
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Feltoltes.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    });
 
 
-
-            //String id = databaseReceptek.push().getKey();
-
-            long id = EloMaxID+1;
-
-
-
-
-
-            Recept recept = new Recept(id, receptNev, receptKat,
-                    receptHozz1,
-                    receptHozz2,
-                    receptHozz3,
-                    receptHozz4,
-                    receptHozz5,
-                    receptHozz6,
-                    receptHozz7,
-                    receptHozz8,
-                    receptHozz9,
-                    receptHozz10,
-                    receptHozz11,
-                    receptHozz12,
-                    receptHozz13,
-                    receptHozz14,
-                    receptHozz15,
-                    receptHozz16,
-                    receptHozz17,
-                    receptHozz18,
-                    receptHozz19,
-                    receptKeszites);
-
-            databaseReceptek.child(receptKat).child(String.valueOf(id)).setValue(recept);
-            Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT);
-
-            Intent intent = new Intent(Feltoltes.this, KezdolapSima.class);
-            finish();
 
 
 
         }
         else{
-            Toast.makeText(Feltoltes.this, "Írd be a recept nevét", Toast.LENGTH_LONG);
+                Toast.makeText(Feltoltes.this, "Kérlek válassz fényképet", Toast.LENGTH_SHORT).show();
         }
+
+
+
+
+
+    }
+
+    private String getFileExtension(Uri mFilePathUri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(mFilePathUri));
     }
 
 
@@ -326,6 +411,7 @@ public class Feltoltes extends AppCompatActivity {
         feltoltEtxt17 = (EditText) findViewById(R.id.feltoltEtxt17);
         feltoltEtxt18 = (EditText) findViewById(R.id.feltoltEtxt18);
         feltoltEtxt19 = (EditText) findViewById(R.id.feltoltEtxt19);
+        mPostIv = (ImageView) findViewById(R.id.pImageIv);
 
         feltoltEtxtKeszit = (EditText) findViewById(R.id.feltoltEtxtKeszit);
         btnFeltolt = (Button) findViewById(R.id.btnFeltolt);
