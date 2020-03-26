@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import id.zelory.compressor.Compressor;
 
 public class Feltoltes extends AppCompatActivity {
 
@@ -68,7 +71,10 @@ public class Feltoltes extends AppCompatActivity {
     String mDatabasePath = "receptek";
 
     Uri mFilePathUri;
+    Uri compressedImage;
     ProgressDialog mProgressDialog;
+    Compressor compressor;
+
     int IMAGE_REQUEST_CODE = 5;
 
 
@@ -81,7 +87,8 @@ public class Feltoltes extends AppCompatActivity {
 
         databaseReceptek = FirebaseDatabase.getInstance().getReference("receptek");
         mStorageReference = FirebaseStorage.getInstance().getReference();
-       // mProgressDialog = new ProgressDialog(Feltoltes.this);
+       mProgressDialog = new ProgressDialog(Feltoltes.this);
+
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Feltoltes.this,
         android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kategoriak));
@@ -250,7 +257,9 @@ public class Feltoltes extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
+
             mFilePathUri = data.getData();
+            
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mFilePathUri);
@@ -265,6 +274,8 @@ public class Feltoltes extends AppCompatActivity {
     private void addRecept() {
 
         if (mFilePathUri != null){
+            mProgressDialog.setTitle("Recept feltöltése folyamatban...");
+            mProgressDialog.show();
             StorageReference storageReference2 = mStorageReference.child(mStoragePath + System.currentTimeMillis()+ "." + getFileExtension(mFilePathUri));
 
             storageReference2.putFile(mFilePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -322,7 +333,7 @@ public class Feltoltes extends AppCompatActivity {
                             receptHozz19,
                             receptKeszites);
 
-                    databaseReceptek.child(receptKat).child(String.valueOf(id)).setValue(recept);
+                    databaseReceptek.child(receptKat).child(receptNev).setValue(recept);
 
                     Toast.makeText(Feltoltes.this, "Sikeres feltöltés", Toast.LENGTH_SHORT);
 
@@ -336,12 +347,16 @@ public class Feltoltes extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            mProgressDialog.dismiss();
                             Toast.makeText(Feltoltes.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            mProgressDialog.setTitle("Feltöltés...");
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+
 
                         }
                     });

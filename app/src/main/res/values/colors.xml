@@ -3,4 +3,14 @@
     <color name="colorPrimary">#ECD8AA</color>
     <color name="colorPrimaryDark">#9B8678</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="colorBarna">#5B4135</color>
+    <color name="colorVaj">#C7AD9D</color>
+    <color name="colorFeheres">#DBDADe</color>
+
+
+    <color name="colorPrimaryTartalek">#ECD8AA</color>
+    <color name="colorPrimaryDarkTartalek">#9B8678</color>
+    <color name="colorAccentTartalek">#FFFFFF</color>
+
+
 </resources>
