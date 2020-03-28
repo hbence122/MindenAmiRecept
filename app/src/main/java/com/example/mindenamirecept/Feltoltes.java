@@ -259,7 +259,7 @@ public class Feltoltes extends AppCompatActivity {
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
 
             mFilePathUri = data.getData();
-            
+
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mFilePathUri);

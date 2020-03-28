@@ -42,7 +42,7 @@ public class ViewHolder  extends RecyclerView.ViewHolder {
 
         mTitleTv.setText(receptNev);
         mDetailTv.setText(receptLeiras);
-        Picasso.get().load(image).into(mImageTv);
+        Picasso.get().load(image).resize(600,400).into(mImageTv);
     }
 
     private ViewHolder.ClickListener mClickListener;
