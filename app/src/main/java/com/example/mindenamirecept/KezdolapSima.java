@@ -100,5 +100,10 @@ public class KezdolapSima extends AppCompatActivity {
 
 
     }
+
+    public void onClickKedvencek(View view) {
+        Intent intent = new Intent(KezdolapSima.this, KedvencKategoriak.class);
+        startActivity(intent);
+    }
 }
 

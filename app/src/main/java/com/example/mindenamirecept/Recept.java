@@ -1,5 +1,7 @@
 package com.example.mindenamirecept;
 
+import com.google.firebase.database.Exclude;
+
 public class Recept {
 
 
@@ -29,6 +31,8 @@ public class Recept {
     String receptHozz18;
     String receptHozz19;
     String receptKeszites;
+
+
 
     public Recept() {
     }

@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -20,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReceptMegjelenit extends AppCompatActivity {
 
@@ -39,8 +44,8 @@ public class ReceptMegjelenit extends AppCompatActivity {
             Hozz18,
             Hozz19,
             Elkeszites;
-    ImageView mImageIv;
-    CheckBox kedvencCb;
+    ImageView mImageIv, kedvencIv;
+
     private FirebaseAuth firebaseAuth;
     DatabaseReference ReceptReference, kedvencReference, imageReference;
     SharedPreferences sharedPreferencesRecept;
@@ -66,9 +71,13 @@ public class ReceptMegjelenit extends AppCompatActivity {
     String receptHozz19;
     String receptLeiras;
 
+    Boolean isKedvenc = false;
+
     String receptKeszites;
 
     String kedvencE;
+
+    List<KedvencRecept> favList;
 
 
 
@@ -88,12 +97,14 @@ public class ReceptMegjelenit extends AppCompatActivity {
         ReceptReference = FirebaseDatabase.getInstance().getReference().child("receptek").child(kategoria).child(receptNev);
 
         if (firebaseAuth.getCurrentUser() != null){
-            kedvencReference = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseAuth.getCurrentUser().getUid()).child("kedvencek");
+            kedvencReference = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseAuth.getCurrentUser().getUid()).child("kedvencek").child(kategoria);
         }
 
 
 
         imageReference = FirebaseDatabase.getInstance().getReference().child("receptek").child(kategoria).child(receptNev);
+
+
 
 
 
@@ -107,9 +118,15 @@ public class ReceptMegjelenit extends AppCompatActivity {
                     if (dataSnapshot.child(receptNev).exists()) {
                         kedvencE = dataSnapshot.child(receptNev).child("receptNev").getValue().toString();
 
+
+
                         if (kedvencE.equals(receptNev)) {
-                            kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
-                            kedvencCb.setChecked(true);
+                            kedvencIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+
+                            isKedvenc = true;
+
+                           // kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+                            //kedvencCb.setChecked(true);
                         }
                     }
 
@@ -125,7 +142,9 @@ public class ReceptMegjelenit extends AppCompatActivity {
         }
 
 
-        kedvencCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
+      /*  kedvencCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 
             @Override
@@ -160,9 +179,12 @@ public class ReceptMegjelenit extends AppCompatActivity {
                             receptKeszites);
 
 
+
                     if (isChecked) {
                         kedvencReference.child(receptNev).setValue(kedvencrecept);
                         kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+
+
                         kedvencCb.setChecked(true);
                         Toast.makeText(ReceptMegjelenit.this, "Hozzáadva a kedvencekhez!", Toast.LENGTH_SHORT).show();
 
@@ -174,7 +196,7 @@ public class ReceptMegjelenit extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
 
 
@@ -371,11 +393,14 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
     }
 
+
+
     public void init(){
         mTitleTv = findViewById(R.id.rTitleTvR);
         mDetailtv = findViewById(R.id.LeirastxtR);
         mImageIv = findViewById(R.id.rimageViewR);
-        kedvencCb = findViewById(R.id.kedvencCb);
+       // kedvencCb = findViewById(R.id.kedvencCb);
+        kedvencIv = findViewById(R.id.kedvencIv);
         Hozz1 = findViewById(R.id.Hozz1);
         Hozz2 = findViewById(R.id.Hozz2);
         Hozz3 = findViewById(R.id.Hozz3);
@@ -398,5 +423,58 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
         Elkeszites = findViewById(R.id.Elkeszites);
         firebaseAuth = FirebaseAuth.getInstance();
+        favList = new ArrayList<>();
+    }
+
+    public void onClickKedvenc(View view) {
+
+        if (firebaseAuth.getCurrentUser() == null) {
+            Toast.makeText(ReceptMegjelenit.this, "A funkció használatához kérlek jelentkezz be!", Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+            if (isKedvenc == false){
+                String receptNev = getIntent().getStringExtra("receptNev");
+                String receptLeiras = getIntent().getStringExtra("receptLeiras");
+                KedvencRecept kedvencrecept = new KedvencRecept(id, receptNev, receptLeiras, image,
+                        receptHozz1,
+                        receptHozz2,
+                        receptHozz3,
+                        receptHozz4,
+                        receptHozz5,
+                        receptHozz6,
+                        receptHozz7,
+                        receptHozz8,
+                        receptHozz9,
+                        receptHozz10,
+                        receptHozz11,
+                        receptHozz12,
+                        receptHozz13,
+                        receptHozz14,
+                        receptHozz15,
+                        receptHozz16,
+                        receptHozz17,
+                        receptHozz18,
+                        receptHozz19,
+                        receptKeszites);
+
+                kedvencReference.child(receptNev).setValue(kedvencrecept);
+                Toast.makeText(ReceptMegjelenit.this, "Hozzáadva a kedvencekhez!", Toast.LENGTH_SHORT).show();
+                kedvencIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
+
+                isKedvenc = true;
+
+
+            }
+
+            else{
+                String receptNev = getIntent().getStringExtra("receptNev");
+                kedvencReference.child(receptNev).setValue(null);
+                Toast.makeText(ReceptMegjelenit.this, "Eltávolítva a kedvencekből!", Toast.LENGTH_SHORT).show();
+                kedvencIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
+                isKedvenc = false;
+
+            }
+        }
     }
 }
