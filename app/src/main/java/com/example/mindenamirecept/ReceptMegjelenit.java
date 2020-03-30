@@ -67,6 +67,10 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
     String receptKeszites;
 
+    String kedvencE;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +96,36 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
 
 
+        kedvencReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(receptNev).exists()){
+                    kedvencE = dataSnapshot.child(receptNev).child("receptNev").getValue().toString();
+
+                    if (kedvencE.equals(receptNev)){
+                        kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+                        kedvencCb.setChecked(true);
+                    }
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         kedvencCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (firebaseAuth.getCurrentUser() == null) {
                     Toast.makeText(ReceptMegjelenit.this, "A funkció használatához kérlek jelentkezz be!", Toast.LENGTH_SHORT).show();
                     buttonView.setChecked(false);
@@ -123,19 +154,25 @@ public class ReceptMegjelenit extends AppCompatActivity {
                         receptKeszites);
 
 
-                if (isChecked){
+
+                if (isChecked == true){
                     kedvencReference.child(receptNev).setValue(kedvencrecept);
                     kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+                    kedvencCb.setChecked(true);
                     Toast.makeText(ReceptMegjelenit.this, "Hozzáadva a kedvencekhez!", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
                     kedvencReference.child(receptNev).setValue(null);
+                    kedvencCb.setChecked(false);
                     kedvencCb.setButtonDrawable(R.drawable.ic_favorite_border_black_24dp);
                     Toast.makeText(ReceptMegjelenit.this, "Eltávolítva a kedvencekből!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+
 
         imageReference.addValueEventListener(new ValueEventListener() {
             @Override
