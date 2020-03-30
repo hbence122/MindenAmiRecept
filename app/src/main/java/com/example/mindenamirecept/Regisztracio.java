@@ -22,12 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Regisztracio extends AppCompatActivity {
 
-    TextView txtRCim;
-    EditText edtxtRTeljes, edtxtRFelhasz, edtxtRJelszo, edtxtREmail;
-    Button bttnRegisztral, bttnVanFiok;
+    private TextView txtRCim;
+    private EditText edtxtRTeljes, edtxtRFelhasz, edtxtRJelszo, edtxtREmail;
+    private Button bttnRegisztral, bttnVanFiok;
     private DatabaseReference databaseUsers;
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,40 +73,46 @@ public class Regisztracio extends AppCompatActivity {
     }
 
     private void addUser() {
-        String username = edtxtRFelhasz.getText().toString();
+
+        final String username = edtxtRFelhasz.getText().toString();
         String password = edtxtRJelszo.getText().toString();
-        String name = edtxtRTeljes.getText().toString().trim();
+        final String name = edtxtRTeljes.getText().toString().trim();
         String email = edtxtREmail.getText().toString();
 
+
         if (!TextUtils.isEmpty(username)){
+
+
 
             firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(Regisztracio.this, "Sikeresen regisztráltál", Toast.LENGTH_SHORT).show();
+                       String uid = task.getResult().getUser().getUid();
+                        String email = task.getResult().getUser().getEmail();
+                        User user = new User(uid, username, name, email);
+                        databaseUsers.child(uid).setValue(user);
+                        Toast.makeText(Regisztracio.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Regisztracio.this, KezdolapSima.class);
                         startActivity(intent);
                         finish();
                     }
                     else{
-                        Toast.makeText(Regisztracio.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Regisztracio.this, "Hiba! Ellenőrizze az internet kapcsolatot és próbálja újra!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
+
             String id = databaseUsers.push().getKey();
 
-            User user = new User(id, username, name, email);
-            databaseUsers.child(id).setValue(user);
 
 
 
 
 
-            Intent intent = new Intent(Regisztracio.this, KezdolapSima.class);
-            startActivity(intent);
-            finish();
+
+
         }
         else{
             Toast.makeText(Regisztracio.this, "Írd be a felhasználónevet és a jelszót", Toast.LENGTH_LONG).show();

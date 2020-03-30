@@ -56,22 +56,22 @@ public class MainActivity extends AppCompatActivity {
         bttnBelepes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = edtxtFelhasz.getText().toString();
+                String email = edtxtFelhasz.getText().toString();
                 String password = edtxtJelszo.getText().toString();
-                if (username.isEmpty()){
-                    edtxtFelhasz.setError("Írd be a felhasználóneved");
+                if (email.isEmpty()){
+                    edtxtFelhasz.setError("Írd be az email címed!");
                 }
                 else if (password.isEmpty()){
-                    edtxtJelszo.setError("Írd be a jelszavadat");
+                    edtxtJelszo.setError("Írd be a jelszavadat!");
                     edtxtJelszo.requestFocus();
                 }
-                else if ((!username.isEmpty() && !password.isEmpty())){
+                else if ((!email.isEmpty() && !password.isEmpty())){
 
-                    firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
-                                Toast.makeText(MainActivity.this,"Hiba történt. Jelentkezz be újra!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Hiba történt! Ellenőrizze az internet kapcsolatot és jelenkezz és jelentkezzen be újra!",Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Intent intent = new Intent(MainActivity.this, KezdolapSima.class);

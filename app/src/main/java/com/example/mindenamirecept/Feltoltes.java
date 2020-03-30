@@ -87,7 +87,7 @@ public class Feltoltes extends AppCompatActivity {
 
         databaseReceptek = FirebaseDatabase.getInstance().getReference("receptek");
         mStorageReference = FirebaseStorage.getInstance().getReference();
-       mProgressDialog = new ProgressDialog(Feltoltes.this);
+        mProgressDialog = new ProgressDialog(Feltoltes.this);
 
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Feltoltes.this,
@@ -355,7 +355,7 @@ public class Feltoltes extends AppCompatActivity {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             mProgressDialog.setTitle("Feltöltés...");
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+
 
 
                         }
@@ -367,7 +367,7 @@ public class Feltoltes extends AppCompatActivity {
 
         }
         else{
-                Toast.makeText(Feltoltes.this, "Kérlek válassz fényképet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Feltoltes.this, "Kérlek válassz fényképet!", Toast.LENGTH_SHORT).show();
         }
 
 
