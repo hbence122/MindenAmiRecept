@@ -64,6 +64,7 @@ public class ReceptMegjelenit extends AppCompatActivity {
     String receptHozz17;
     String receptHozz18;
     String receptHozz19;
+    String receptLeiras;
 
     String receptKeszites;
 
@@ -86,7 +87,11 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
         ReceptReference = FirebaseDatabase.getInstance().getReference().child("receptek").child(kategoria).child(receptNev);
 
-        kedvencReference = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseAuth.getCurrentUser().getUid()).child("kedvencek");
+        if (firebaseAuth.getCurrentUser() != null){
+            kedvencReference = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseAuth.getCurrentUser().getUid()).child("kedvencek");
+        }
+
+
 
         imageReference = FirebaseDatabase.getInstance().getReference().child("receptek").child(kategoria).child(receptNev);
 
@@ -94,30 +99,30 @@ public class ReceptMegjelenit extends AppCompatActivity {
 
 
 
+        if (firebaseAuth.getCurrentUser() != null) {
 
+            kedvencReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.child(receptNev).exists()) {
+                        kedvencE = dataSnapshot.child(receptNev).child("receptNev").getValue().toString();
 
-        kedvencReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(receptNev).exists()){
-                    kedvencE = dataSnapshot.child(receptNev).child("receptNev").getValue().toString();
-
-                    if (kedvencE.equals(receptNev)){
-                        kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
-                        kedvencCb.setChecked(true);
+                        if (kedvencE.equals(receptNev)) {
+                            kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+                            kedvencCb.setChecked(true);
+                        }
                     }
+
+
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                }
+            });
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        }
 
 
         kedvencCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -131,42 +136,42 @@ public class ReceptMegjelenit extends AppCompatActivity {
                     buttonView.setChecked(false);
                 }
 
-                KedvencRecept kedvencrecept = new KedvencRecept(id, receptNev, image,
-                        receptHozz1,
-                        receptHozz2,
-                        receptHozz3,
-                        receptHozz4,
-                        receptHozz5,
-                        receptHozz6,
-                        receptHozz7,
-                        receptHozz8,
-                        receptHozz9,
-                        receptHozz10,
-                        receptHozz11,
-                        receptHozz12,
-                        receptHozz13,
-                        receptHozz14,
-                        receptHozz15,
-                        receptHozz16,
-                        receptHozz17,
-                        receptHozz18,
-                        receptHozz19,
-                        receptKeszites);
+                else {
+                    KedvencRecept kedvencrecept = new KedvencRecept(id, receptNev, "Elkészítési idő: "+receptLeiras, image,
+                            receptHozz1,
+                            receptHozz2,
+                            receptHozz3,
+                            receptHozz4,
+                            receptHozz5,
+                            receptHozz6,
+                            receptHozz7,
+                            receptHozz8,
+                            receptHozz9,
+                            receptHozz10,
+                            receptHozz11,
+                            receptHozz12,
+                            receptHozz13,
+                            receptHozz14,
+                            receptHozz15,
+                            receptHozz16,
+                            receptHozz17,
+                            receptHozz18,
+                            receptHozz19,
+                            receptKeszites);
 
 
+                    if (isChecked) {
+                        kedvencReference.child(receptNev).setValue(kedvencrecept);
+                        kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
+                        kedvencCb.setChecked(true);
+                        Toast.makeText(ReceptMegjelenit.this, "Hozzáadva a kedvencekhez!", Toast.LENGTH_SHORT).show();
 
-                if (isChecked == true){
-                    kedvencReference.child(receptNev).setValue(kedvencrecept);
-                    kedvencCb.setButtonDrawable(R.drawable.ic_favorite_black_24dp);
-                    kedvencCb.setChecked(true);
-                    Toast.makeText(ReceptMegjelenit.this, "Hozzáadva a kedvencekhez!", Toast.LENGTH_SHORT).show();
-
-                }
-                else{
-                    kedvencReference.child(receptNev).setValue(null);
-                    kedvencCb.setChecked(false);
-                    kedvencCb.setButtonDrawable(R.drawable.ic_favorite_border_black_24dp);
-                    Toast.makeText(ReceptMegjelenit.this, "Eltávolítva a kedvencekből!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        kedvencReference.child(receptNev).setValue(null);
+                        kedvencCb.setChecked(false);
+                        kedvencCb.setButtonDrawable(R.drawable.ic_favorite_border_black_24dp);
+                        Toast.makeText(ReceptMegjelenit.this, "Eltávolítva a kedvencekből!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -209,118 +214,118 @@ public class ReceptMegjelenit extends AppCompatActivity {
         ReceptReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("receptHozz1").exists() && dataSnapshot.child("receptHozz1").toString() != "" ){
+                if (dataSnapshot.child("receptHozz1").getValue() != null){
                     String receptHozz1 = dataSnapshot.child("receptHozz1").getValue().toString();
                     Hozz1.setVisibility(TextView.VISIBLE);
                     Hozz1.setText(receptHozz1);
 
                 }
-                if (dataSnapshot.child("receptHozz2").exists() && dataSnapshot.child("receptHozz2").toString() != ""){
+                if (dataSnapshot.child("receptHozz2").getValue() != null){
                     String receptHozz2 = dataSnapshot.child("receptHozz2").getValue().toString();
                     Hozz2.setVisibility(TextView.VISIBLE);
                     Hozz2.setText(receptHozz2);
 
                 }
-                if (dataSnapshot.child("receptHozz3").exists() && dataSnapshot.child("receptHozz3").toString() != ""){
+                if (dataSnapshot.child("receptHozz3").getValue() != null){
                     String receptHozz3 = dataSnapshot.child("receptHozz3").getValue().toString();
                     Hozz3.setVisibility(TextView.VISIBLE);
                     Hozz3.setText(receptHozz3);
 
                 }
-                if (dataSnapshot.child("receptHozz4").exists() && dataSnapshot.child("receptHozz4").toString() != ""){
+                if (dataSnapshot.child("receptHozz4").getValue() != null){
                     String receptHozz4 = dataSnapshot.child("receptHozz4").getValue().toString();
                     Hozz4.setVisibility(TextView.VISIBLE);
                     Hozz4.setText(receptHozz4);
 
                 }
-                if (dataSnapshot.child("receptHozz5").exists() && dataSnapshot.child("receptHozz5").toString() != ""){
+                if (dataSnapshot.child("receptHozz5").getValue() != null){
                     String receptHozz5 = dataSnapshot.child("receptHozz5").getValue().toString();
                     Hozz5.setVisibility(TextView.VISIBLE);
                     Hozz5.setText(receptHozz5);
 
                 }
-                if (dataSnapshot.child("receptHozz6").exists() && dataSnapshot.child("receptHozz6").toString() != ""){
+                if (dataSnapshot.child("receptHozz6").getValue() != null){
                     String receptHozz6 = dataSnapshot.child("receptHozz6").getValue().toString();
                     Hozz6.setVisibility(TextView.VISIBLE);
                     Hozz6.setText(receptHozz6);
 
                 }
-                if (dataSnapshot.child("receptHozz7").exists() && dataSnapshot.child("receptHozz7").toString() != ""){
+                if (dataSnapshot.child("receptHozz7").getValue() != null){
                     String receptHozz7 = dataSnapshot.child("receptHozz7").getValue().toString();
                     Hozz7.setVisibility(TextView.VISIBLE);
                     Hozz7.setText(receptHozz7);
 
                 }
-                if (dataSnapshot.child("receptHozz8").exists() && dataSnapshot.child("receptHozz8").toString() != ""){
+                if (dataSnapshot.child("receptHozz8").getValue() != null){
                     String receptHozz8 = dataSnapshot.child("receptHozz8").getValue().toString();
                     Hozz8.setVisibility(TextView.VISIBLE);
                     Hozz8.setText(receptHozz8);
 
                 }
 
-                if (dataSnapshot.child("receptHozz9").exists() && dataSnapshot.child("receptHozz9").toString() != ""){
+                if (dataSnapshot.child("receptHozz9").getValue() != null){
                     String receptHozz9 = dataSnapshot.child("receptHozz9").getValue().toString();
                     Hozz9.setVisibility(TextView.VISIBLE);
                     Hozz9.setText(receptHozz9);
 
                 }
-                if (dataSnapshot.child("receptHozz10").exists() && dataSnapshot.child("receptHozz10").toString() != ""){
+                if (dataSnapshot.child("receptHozz10").getValue() != null){
                     String receptHozz10 = dataSnapshot.child("receptHozz10").getValue().toString();
                     Hozz10.setVisibility(TextView.VISIBLE);
                     Hozz10.setText(receptHozz10);
 
                 }
-                if (dataSnapshot.child("receptHozz11").exists() && dataSnapshot.child("receptHozz11").toString() != ""){
+                if (dataSnapshot.child("receptHozz11").getValue() != null){
                     String receptHozz11 = dataSnapshot.child("receptHozz11").getValue().toString();
                     Hozz11.setVisibility(TextView.VISIBLE);
                     Hozz11.setText(receptHozz11);
 
                 }
 
-                if (dataSnapshot.child("receptHozz12").exists() && dataSnapshot.child("receptHozz12").toString() != ""){
+                if (dataSnapshot.child("receptHozz12").getValue() != null){
                     String receptHozz12 = dataSnapshot.child("receptHozz12").getValue().toString();
                     Hozz12.setVisibility(TextView.VISIBLE);
                     Hozz12.setText(receptHozz12);
 
                 }
-                if (dataSnapshot.child("receptHozz13").exists() && dataSnapshot.child("receptHozz13").toString() != ""){
+                if (dataSnapshot.child("receptHozz13").getValue() != null){
                     String receptHozz13 = dataSnapshot.child("receptHozz13").getValue().toString();
                     Hozz13.setVisibility(TextView.VISIBLE);
                     Hozz13.setText(receptHozz13);
 
                 }
-                if (dataSnapshot.child("receptHozz14").exists() && dataSnapshot.child("receptHozz14").toString() != ""){
+                if (dataSnapshot.child("receptHozz14").getValue() != null){
                     String receptHozz14 = dataSnapshot.child("receptHozz14").getValue().toString();
                     Hozz14.setVisibility(TextView.VISIBLE);
                     Hozz14.setText(receptHozz14);
 
                 }
-                if (dataSnapshot.child("receptHozz15").exists() && dataSnapshot.child("receptHozz15").toString() != ""){
+                if (dataSnapshot.child("receptHozz15").getValue() != null){
                     String receptHozz15 = dataSnapshot.child("receptHozz15").getValue().toString();
                     Hozz15.setVisibility(TextView.VISIBLE);
                     Hozz15.setText(receptHozz15);
 
                 }
-                if (dataSnapshot.child("receptHozz16").exists() && dataSnapshot.child("receptHozz16").toString() != ""){
+                if (dataSnapshot.child("receptHozz16").getValue() != null){
                     String receptHozz16 = dataSnapshot.child("receptHozz16").getValue().toString();
                     Hozz16.setVisibility(TextView.VISIBLE);
                     Hozz16.setText(receptHozz16);
 
                 }
-                if (dataSnapshot.child("receptHozz17").exists() && dataSnapshot.child("receptHozz17").toString() != ""){
+                if (dataSnapshot.child("receptHozz17").getValue() != null){
                     String receptHozz17 = dataSnapshot.child("receptHozz17").getValue().toString();
                     Hozz17.setVisibility(TextView.VISIBLE);
                     Hozz17.setText(receptHozz17);
 
                 }
-                if (dataSnapshot.child("receptHozz18").exists() && dataSnapshot.child("receptHozz18").toString() != ""){
+                if (dataSnapshot.child("receptHozz18").getValue() != null){
 
                     String receptHozz18 = dataSnapshot.child("receptHozz18").getValue().toString();
                     Hozz18.setVisibility(TextView.VISIBLE);
                     Hozz18.setText(receptHozz18);
 
                 }
-                if (dataSnapshot.child("receptHozz19").exists() && dataSnapshot.child("receptHozz19").toString() != ""){
+                if (dataSnapshot.child("receptHozz19").getValue() != null){
 
                     String receptHozz19 = dataSnapshot.child("receptHozz19").getValue().toString();
                     Hozz19.setVisibility(TextView.VISIBLE);

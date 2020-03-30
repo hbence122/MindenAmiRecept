@@ -59,7 +59,8 @@ public class Feltoltes extends AppCompatActivity {
             feltoltEtxt17,
             feltoltEtxt18,
             feltoltEtxt19,
-            feltoltEtxtKeszit;
+            feltoltEtxtKeszit,
+            LeirasEtxt;
     Button btnFeltolt, HozzavaloHozzaadbtn;
     ImageView mPostIv;
     private DatabaseReference databaseReceptek, IdReference;
@@ -288,6 +289,7 @@ public class Feltoltes extends AppCompatActivity {
                     String receptNev = FeltoltEtxtNev.getText().toString().trim();
 
                     String receptKat = KatSpinner.getSelectedItem().toString();
+                    String receptLeiras = LeirasEtxt.getText().toString().trim();
                     String receptHozz1 = feltoltEtxt1.getText().toString().trim();
                     String receptHozz2 = feltoltEtxt2.getText().toString().trim();
                     String receptHozz3 = feltoltEtxt3.getText().toString().trim();
@@ -311,7 +313,7 @@ public class Feltoltes extends AppCompatActivity {
                     String receptKeszites = feltoltEtxtKeszit.getText().toString();
                     long id = EloMaxID+1;
 
-                    Recept recept = new Recept(id, receptNev, receptKat, downloadUrl.toString(), receptNev.toLowerCase(),
+                    Recept recept = new Recept(id, receptNev, receptKat, "Elkészítési idő: "+receptLeiras, downloadUrl.toString(), receptNev.toLowerCase(),
                             receptHozz1,
                             receptHozz2,
                             receptHozz3,
@@ -426,6 +428,7 @@ public class Feltoltes extends AppCompatActivity {
         feltoltEtxt17 = (EditText) findViewById(R.id.feltoltEtxt17);
         feltoltEtxt18 = (EditText) findViewById(R.id.feltoltEtxt18);
         feltoltEtxt19 = (EditText) findViewById(R.id.feltoltEtxt19);
+        LeirasEtxt = findViewById(R.id.LeirasEtxt);
         mPostIv = (ImageView) findViewById(R.id.pImageIv);
 
         feltoltEtxtKeszit = (EditText) findViewById(R.id.feltoltEtxtKeszit);

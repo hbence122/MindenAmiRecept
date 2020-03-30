@@ -4,6 +4,7 @@ public class KedvencRecept {
 
     String id;
     String receptNev;
+    String receptLeiras;
     String image;
     String receptHozz1;
     String receptHozz2;
@@ -29,7 +30,7 @@ public class KedvencRecept {
     public KedvencRecept() {
     }
 
-    public KedvencRecept(String id, String receptNev, String image,
+    public KedvencRecept(String id, String receptNev, String receptLeiras, String image,
                          String receptHozz1,
                          String receptHozz2,
                          String receptHozz3,
@@ -53,6 +54,7 @@ public class KedvencRecept {
         this.id = id;
         this.receptNev = receptNev;
 
+        this.receptLeiras = receptLeiras;
         this.image = image;
 
         this.receptHozz1 = receptHozz1;
@@ -85,7 +87,9 @@ public class KedvencRecept {
         return receptNev;
     }
 
-
+    public String getReceptLeiras() {
+        return receptLeiras;
+    }
 
     public String getImage() {
         return image;

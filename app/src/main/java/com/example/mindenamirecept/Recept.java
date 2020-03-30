@@ -6,6 +6,7 @@ public class Recept {
     long id;
     String receptNev;
     String receptKat;
+    String receptLeiras;
     String image;
     String search;
     String receptHozz1;
@@ -32,7 +33,9 @@ public class Recept {
     public Recept() {
     }
 
-    public Recept(long id, String receptNev, String receptKat,String image, String search,
+
+
+    public Recept(long id, String receptNev, String receptKat, String receptLeiras, String image, String search,
                   String receptHozz1,
                   String receptHozz2,
                   String receptHozz3,
@@ -57,6 +60,7 @@ public class Recept {
         this.id=id;
         this.receptNev = receptNev;
         this.receptKat = receptKat;
+        this.receptLeiras = receptLeiras;
         this.image = image;
         this.search = search;
         this.receptHozz1 = receptHozz1;
@@ -64,20 +68,20 @@ public class Recept {
         this.receptHozz3 = receptHozz3;
         this.receptHozz4 = receptHozz4;
         this.receptHozz5 = receptHozz5;
-        this.receptHozz6 = receptHozz5;
-        this.receptHozz7 = receptHozz5;
-        this.receptHozz8 = receptHozz5;
-        this.receptHozz9 = receptHozz5;
-        this.receptHozz10 = receptHozz5;
-        this.receptHozz11 = receptHozz5;
-        this.receptHozz12 = receptHozz5;
-        this.receptHozz13 = receptHozz5;
-        this.receptHozz14 = receptHozz5;
-        this.receptHozz15 = receptHozz5;
-        this.receptHozz16 = receptHozz5;
-        this.receptHozz17 = receptHozz5;
-        this.receptHozz18 = receptHozz5;
-        this.receptHozz19 = receptHozz5;
+        this.receptHozz6 = receptHozz6;
+        this.receptHozz7 = receptHozz7;
+        this.receptHozz8 = receptHozz8;
+        this.receptHozz9 = receptHozz9;
+        this.receptHozz10 = receptHozz10;
+        this.receptHozz11 = receptHozz11;
+        this.receptHozz12 = receptHozz12;
+        this.receptHozz13 = receptHozz13;
+        this.receptHozz14 = receptHozz14;
+        this.receptHozz15 = receptHozz15;
+        this.receptHozz16 = receptHozz16;
+        this.receptHozz17 = receptHozz17;
+        this.receptHozz18 = receptHozz18;
+        this.receptHozz19 = receptHozz19;
         this.receptKeszites = receptKeszites;
     }
 
@@ -91,6 +95,10 @@ public class Recept {
 
     public String getReceptKat() {
         return receptKat;
+    }
+
+    public String getReceptLeiras() {
+        return receptLeiras;
     }
 
     public String getImage() {

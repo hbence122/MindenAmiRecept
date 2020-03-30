@@ -46,6 +46,15 @@
 
             />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/LeirasEtxt"
+            android:hint="Elkészítési idő:"
+            android:layout_marginHorizontal="15dp"
+            android:singleLine="true"
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -385,6 +394,7 @@
         android:gravity="start"
         android:id="@+id/feltoltEtxtKeszit"
         android:backgroundTint="@color/colorPrimary"
+        android:scrollbars="vertical"
         />
 
     <Button
